@@ -15,12 +15,13 @@ namespace LZSS
 			string dictionary;
 
 			try {
-				StreamReader sr = new StreamReader("sam-i-am.txt", Encoding.ASCII);
+				StreamReader sr = new StreamReader("pg45.txt", Encoding.ASCII);
 				string fileContent = sr.ReadToEnd();
 				sr.Close();
 
 				dictionary = new String(fileContent.FirstOrDefault(), _dictionaryLength);
 
+				Console.WriteLine("Encoding...");
 				string encoded = Encoder.Instance.Encode(fileContent, dictionary, _bufferLength, _dictionaryLength);
 
 				#if DEBUG
@@ -28,6 +29,7 @@ namespace LZSS
 					Console.WriteLine(encoded);
 				#endif
 
+				Console.WriteLine("Decoding...");
 				string decoded = Encoder.Instance.Decode(encoded, dictionary);
 
 				#if DEBUG
